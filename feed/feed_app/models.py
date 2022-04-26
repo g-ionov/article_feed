@@ -1,7 +1,26 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 from register.validators import EmailValidator
+
+
+class UserManager(BaseUserManager):
+    """Модель, предназначенная для создания суперпользователя через терминал"""
+    def create_superuser(self, email=None, password=None, **extra_fields):
+        if not email:
+            raise ValueError("Email - обязательное поле.")
+        if not password:
+            raise ValueError("Пароль - обязательное поле.")
+
+        user = self.model(email=email)
+        user.username = 'Default_SuperUser'
+        user.set_password(password)
+        user.is_active = True
+        user.is_staff = True
+        user.is_subscriber = True
+        user.save(using=self._db)
+        return user
+
 
 class User(AbstractUser):
     """Модель пользователя"""
@@ -16,8 +35,12 @@ class User(AbstractUser):
         help_text=_(
             "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
         ),
-        default="Default_User"
+        default="Default_User",
+        null=True,
+        blank=True
     )
+
+    objects = UserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -41,6 +64,8 @@ class Article(models.Model):
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
         ordering = ['title']
+
+
 
 
 
