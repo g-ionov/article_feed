@@ -14,7 +14,7 @@
 Далее необходимо создать базу данных. Это можно сделать при помощи pgAdmin или Shell(psql).
 Если Вы используете sheel:
 
-CREATE DATABASE article_feed_db;
+CREATE DATABASE article_feed;
 CREATE USER user_db WITH PASSWORD '12345';
 ALTER ROLE user_db SET client_encoding TO 'utf8';
 ALTER ROLE user_db SET default_transaction_isolation TO 'read committed';
@@ -22,25 +22,8 @@ ALTER ROLE user_db SET timezone TO 'UTC';
 GRANT ALL PRIVILEGES ON DATABASE blog_comments_db TO article_feed;
 \q
 
-
-Настройки базы данных в проекте:
-DATABASES={
-   'default':{
-      'ENGINE':'django.db.backends.postgresql_psycopg2',
-      'NAME':'article_feed_db',
-      'USER':'user_db',
-      'PASSWORD':'12345',
-      'HOST':'localhost',
-      'PORT':'5432',
-   }
-}
-
-Если Вы используете другого пользователя для взаимодействия с базой данных, то Вам необходимо изменить USER и PASSWORD
-Данные настройки необходимо поместить в файл article_feed/feed/cfg/settings.py
-
-Также необходимо поместить туда SECRET_KEY (его Вы можете задать самостоятельно):
-SECRET_KEY = 'django-insecure--ALkandsl;fno2io@@R&!@#*ojfouwa4)_l4+*v-@mz*md5ceh('
-
+Если Вы используете другого пользователя или называете Вашу базу данных иначе,
+то Вам необходимо изменить настройки в feed/cfg/local_settings.py на Ваши.
 
 -------------------------------------------------------------------------------------
 				Настройки виртуального окружения и установка зависимостей
@@ -56,7 +39,7 @@ pip install -r blog/requirements.txt
 -------------------------------------------------------------------------------------
 				Применение миграций, создание суперпользователя и запуск проекта
 -------------------------------------------------------------------------------------
-Переходим в директорию, в которой находится файл manage.py (команда: cd blog)
+Переходим в директорию, в которой находится файл manage.py (команда: cd feed)
 Выполняем команды:
 python manage.py makemigrations
 python manage.py migrate
