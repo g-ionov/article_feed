@@ -34,7 +34,7 @@ GRANT ALL PRIVILEGES ON DATABASE article_feed TO user_db;
 	В Linux: source venv/bin/activate
 
 После чего выполним установку зависимостей:
-pip install -r blog/requirements.txt
+pip install -r requirements.txt
 
 -------------------------------------------------------------------------------------
 				Применение миграций, создание суперпользователя и запуск проекта

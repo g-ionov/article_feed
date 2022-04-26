@@ -11,8 +11,8 @@ db.sqlite3
 
 venv
 
-!feed/feed_app/migrations/__init__.py
 feed/feed_app/migrations/*
+!feed/feed_app/migrations/__init__.py
 
 feed/cfg/prod_settings.py
 
