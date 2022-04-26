@@ -51,4 +51,4 @@ python manage.py createsuperuser
 Теперь можно запускать проект. Для этого выполняем команду:
 python manage.py runserver
 
-Документацию к API ожно посмотреть по адресу: http://127.0.0.1:8000/swagger/
+Документацию к API можно посмотреть по адресу: http://127.0.0.1:8000/swagger/
