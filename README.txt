@@ -19,7 +19,7 @@ CREATE USER user_db WITH PASSWORD '12345';
 ALTER ROLE user_db SET client_encoding TO 'utf8';
 ALTER ROLE user_db SET default_transaction_isolation TO 'read committed';
 ALTER ROLE user_db SET timezone TO 'UTC';
-GRANT ALL PRIVILEGES ON DATABASE blog_comments_db TO article_feed;
+GRANT ALL PRIVILEGES ON DATABASE article_feed TO user_db;
 \q
 
 Если Вы используете другого пользователя или называете Вашу базу данных иначе,
