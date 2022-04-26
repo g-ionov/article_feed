@@ -2,7 +2,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework import generics
 from .models import Article
 from .serializers import ArticleSerializer, ArticleCreateSerializer
-from .permissions import IsSubscriber, IsAuthorOrReadOnly
+from .permissions import IsSubscriber, IsAuthorOrReadOnly, IsAuthor
 
 class ArticlePublicListView(generics.ListAPIView):
     """Просмотр публичных статей"""
@@ -19,6 +19,7 @@ class ArticlePrivateListView(generics.ListAPIView):
 class ArticleCreateView(generics.CreateAPIView):
     """Создание статей"""
     serializer_class = ArticleCreateSerializer
+    permission_classes = [IsAuthor]
 
 class ArticleDetailView(generics.RetrieveUpdateDestroyAPIView):
     """Просмотр детальной информации, редактирование, удаление статей"""
